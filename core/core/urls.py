@@ -24,7 +24,8 @@ from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('receipes/', receipes, name="receipes"),
-    path('delete-receipe/<id>/', delete_receipe, name="delete_receipe")
+    path('delete-receipe/<id>/', delete_receipe, name="delete_receipe"),
+    path('update-receipe/<id>/', update_receipe, name="update_receipe")
 ]
 
 if settings.DEBUG:

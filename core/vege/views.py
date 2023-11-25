@@ -2,9 +2,12 @@ from django.shortcuts import render, redirect
 from .models import *
 from django.contrib.auth.models import User
 from django.contrib import messages
+from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth.decorators import login_required
 
 # Create your views here.
 
+@login_required(login_url="/login/")
 def receipes(request):
     if request.method == "POST":
 
@@ -34,6 +37,7 @@ def receipes(request):
     context = {'receipes': queryset}
     return render(request, 'receipes.html', context)
 
+@login_required(login_url="/login/")
 def update_receipe(request, id):
     queryset = Receipe.objects.get(id = id)
 
@@ -56,13 +60,42 @@ def update_receipe(request, id):
     context = {'receipe' : queryset}
     return render(request, 'update_receipes.html', context)
 
+@login_required(login_url="/login/")
 def delete_receipe(request, id):
     queryset = Receipe.objects.get(id = id)
     queryset.delete()
     return redirect('/receipes/')
 
 def login_page(request):
+
+    if request.method == "POST":
+        username = request.POST.get('username')
+        password = request.POST.get('password')
+
+        # To check if the user exists or not
+        if not User.objects.filter(username = username).exists():
+            messages.error(request, 'Invalid Username')
+            return redirect('/login/')
+        
+        # If user exists, now to check the input password is correct or not
+        user = authenticate(username = username, password = password)
+
+        # If password does not match, it will return none and prompt error as Invalid Password
+        if user is None:
+            messages.error(request, 'Invalid Password')
+            return redirect('/login/')
+        
+        # Session is stored here for user information in 'login' library. So, that user once logged in don't need to login twice
+        else:
+            login(request, user)
+            return redirect('/receipes/')
+
+    
     return render(request, 'login.html')
+
+def logout_page(request):
+    logout(request)
+    return redirect('/login/')
 
 def register(request):
 

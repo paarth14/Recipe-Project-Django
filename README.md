@@ -1,6 +1,7 @@
 # Recipe-Project-Django
 
 ## Features - ADD, UPDATE, DELETE & SEARCH
+## Authentication - Register Page, Login Page
 
 ----------------------------------------------------
 
@@ -15,5 +16,13 @@
 
 ## 4) 'SEARCH' Recipe:
 ![image](https://github.com/paarth14/Recipe-Project-Django/assets/65506287/7f265b40-d538-44e1-ba58-f441d869b098)
+
+## 5) 'REGISTER' Page:
+![image](https://github.com/paarth14/Recipe-Project-Django/assets/65506287/5403ef74-64fd-4fa6-ba65-f28596e9952c)
+
+## 6) 'LOGIN' Page:
+![image](https://github.com/paarth14/Recipe-Project-Django/assets/65506287/1b1daba2-2817-4972-b4da-538773b3a59d)
+
+
 
 
